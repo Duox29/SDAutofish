@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.duox.sdautofish.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "autofish.refmap.json",
+  "mixins": [
+    "FishingAutoMixin",
+    "MinigameCrashFixMixin"
+  ],
+  "client": [
+    "FishingAutoMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,97 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+group = 'com.duox'
+version = '1.0.0'
+
+base {
+    archivesName = 'autofish-addon'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    // Tự động apply mixin config vào môi trường dev
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            // Load mixin config
+            arg "-mixin.config=mixins.autofish.json"
+
+            mods {
+                autofish {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "mixins.autofish.json"
+    config "mixins.autofish.json"
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url "https://cursemaven.com"
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation 'io.github.llamalad7:mixinextras-forge:0.4.0'
+
+    // Import mod gốc dưới dạng thư viện để compile (không đóng gói vào jar cuối)
+    implementation fg.deobf("curse.maven:stardew-fishing-1066037:7266346")
+    // Lưu ý: Tên 'blank' ở trên là placeholder, Gradle sẽ tìm file trong flatDir libs/
+    // Mẹo: Đổi tên file trong libs thành "stardew_fishing-3.3.jar" để khớp.
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: '1.20.1', minecraft_version_range: '[1.20.1,1.21)',
+            forge_version: '47.2.0', forge_version_range: '[47,)',
+            loader_version_range: '[47,)',
+            mod_id: 'autofish', mod_name: 'Stardew Auto Fish', mod_license: 'MIT',
+            mod_version: '1.0.0', mod_authors: 'Dev', mod_description: 'Auto player for Stardew Fishing'
+    ]
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+
+    jar {
+        manifest {
+            attributes([
+                    "Specification-Title": "autofish",
+                    "Specification-Vendor": "duox",
+                    "Specification-Version": "1",
+                    "Implementation-Title": project.name,
+                    "Implementation-Version": project.jar.archiveVersion,
+                    "Implementation-Vendor" :"example",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            ])
+        }
+        // THÊM DÒNG NÀY ĐỂ SỬA LỖI DUPLICATE ENTRY
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+}
