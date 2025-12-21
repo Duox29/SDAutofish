@@ -13,6 +13,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lwjgl.glfw.GLFW;
 
+/**
+ * Main mod class for AutoFish functionality.
+ * Provides toggle key binding and mod state management.
+ */
 @Mod("autofish")
 public class AutoFishMod {
     public static boolean enabled = false;
@@ -23,23 +27,32 @@ public class AutoFishMod {
             "key.categories.autofish"
     );
 
+    /**
+     * Initializes the mod by registering event listeners and key bindings.
+     */
     public AutoFishMod() {
-        // Đăng ký Event Bus cho Client
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerBindings);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    /**
+     * Registers the toggle key binding with the game.
+     */
     private void registerBindings(RegisterKeyMappingsEvent event) {
         event.register(TOGGLE_KEY);
     }
 
+    /**
+     * Handles key input events to toggle auto-fish functionality.
+     * Shows status message when toggled.
+     */
     @SubscribeEvent
     public void onKeyInput(InputEvent.Key event) {
         if (TOGGLE_KEY.consumeClick()) {
             enabled = !enabled;
             if (Minecraft.getInstance().player != null) {
                 Minecraft.getInstance().player.displayClientMessage(
-                        Component.literal("Auto Fish AI: " + (enabled ? "ON" : "OFF")),
+                        Component.literal("Auto Fish: " + (enabled ? "ON" : "OFF")),
                         true
                 );
             }

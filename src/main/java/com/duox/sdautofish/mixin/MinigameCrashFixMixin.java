@@ -11,15 +11,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
+/**
+ * Mixin to fix a crash in the MinigameModifiersReloadListener.
+ * This occurs when getModifiers is called before the listener has been initialized.
+ */
 @Mixin(value = MinigameModifiersReloadListener.class, remap = false)
 public class MinigameCrashFixMixin {
 
-    // Shadow field static INSTANCE từ class gốc để kiểm tra
+    // Shadow the static INSTANCE field from the original class for checking.
     @Shadow private static MinigameModifiersReloadListener INSTANCE;
 
+    /**
+     * Injects a check at the beginning of getModifiers to prevent a NullPointerException.
+     * If the INSTANCE is null, it returns an empty Optional, avoiding the crash.
+     *
+     * @param stack The ItemStack being checked for modifiers.
+     * @param cir   The callback info for the returnable method.
+     */
     @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true)
     private static void onGetModifiers(ItemStack stack, CallbackInfoReturnable<Optional<MinigameModifiers>> cir) {
-        // SAFETY CHECK: Nếu INSTANCE chưa khởi tạo (null), trả về Empty ngay lập tức
+        // SAFETY CHECK: If INSTANCE is not yet initialized (null), return Empty immediately to prevent a crash.
         if (INSTANCE == null) {
             cir.setReturnValue(Optional.empty());
         }
