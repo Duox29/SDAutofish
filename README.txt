@@ -1,46 +1,42 @@
+SDAutofish (Stardew Fishing Addon)
+SDAutofish is a client-side Minecraft Forge mod designed as an addon for the Stardew Fishing mod. It completely automates the fishing minigame with "God Mode" precision, ensuring perfect catches and maximizing treasure hunting efficiency.
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+- Features
+God Mode / Perfect Catch: Unlike simple macro clickers, this mod hooks directly into the minigame logic. It removes the fishing bar's inertia and gravity, instantly locking the bar to the fish's position.
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+Smart Treasure Hunter: Automatically targets treasure chests when it is safe to do so (progress > 95%), ensuring you get both the fish and the loot.
 
-Setup Process:
-==============================
+Toggleable In-Game: Easily enable or disable the mod without restarting the game.
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+Default Key: V.
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `./gradlew genEclipseRuns`
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+- Requirements
+Minecraft: 1.20.1
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `./gradlew genIntellijRuns`
-4. Refresh the Gradle Project in IDEA if required.
+Mod Loader: Forge
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-(this does not affect your code) and then start the process again.
+Required Dependency: Stardew Fishing (by Bonker)
 
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+- Installation
+Install Minecraft Forge.
 
-Additional Resources: 
-=========================
-Community Documentation: https://docs.minecraftforge.net/en/1.20.1/gettingstarted/
-LexManos' Install Video: https://youtu.be/8VEdtQLuLO0
-Forge Forums: https://forums.minecraftforge.net/
-Forge Discord: https://discord.minecraftforge.net/
+Install the Stardew Fishing mod.
+
+Download SDAutofish-x.x.x.jar and place it into your game's mods folder.
+
+Launch the game!
+
+- Usage
+Cast your fishing rod to start the minigame.
+
+Press V to toggle the Auto Fish AI (A chat message will confirm ON or OFF).
+
+Sit back and watch the mod catch every fish perfectly.
+
+- License
+This project is licensed under the MIT License.
+
+- Credits
+Original Mod: Stardew Fishing by Bonker (Licensed under MIT).
+
+Addon Author: Duox.
