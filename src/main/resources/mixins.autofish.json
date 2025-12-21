@@ -6,7 +6,8 @@
   "refmap": "autofish.refmap.json",
   "mixins": [
     "FishingAutoMixin",
-    "MinigameCrashFixMixin"
+    "MinigameCrashFixMixin",
+    "FishingMinigameMixin"
   ],
   "client": [
     "FishingAutoMixin"
