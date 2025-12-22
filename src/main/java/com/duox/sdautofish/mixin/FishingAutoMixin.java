@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Mixin class for FishingScreen to enable auto-fishing functionality.
  */
-@Mixin(value = FishingScreen.class, remap = false)
+@Mixin(value = FishingScreen.class)
 public abstract class FishingAutoMixin {
 
     @Shadow private FishingMinigame minigame;

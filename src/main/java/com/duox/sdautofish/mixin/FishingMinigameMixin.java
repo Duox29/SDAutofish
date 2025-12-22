@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Mixin class for FishingMinigame to enable direct position control.
  * Overrides bobber position for perfect auto-fishing alignment.
  */
-@Mixin(value = FishingMinigame.class, remap = false)
+@Mixin(value = FishingMinigame.class)
 public class FishingMinigameMixin {
 
     // Shadow fields from FishingMinigame for position and state access
@@ -31,7 +31,7 @@ public class FishingMinigameMixin {
      * @param mouseDown whether the mouse is currently being held down
      * @param ci        callback info for the injection
      */
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;floor(D)I"))
+    @Inject(method = "tick(Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;floor(D)I"))
     private void onTickLogic(boolean mouseDown, CallbackInfo ci) {
         // Only activate when mod is enabled
         if (AutoFishMod.enabled) {
