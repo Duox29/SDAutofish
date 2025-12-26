@@ -21,14 +21,15 @@ public class FishingMinigameMixin {
     private void onTickLogic(boolean mouseDown, CallbackInfo ci) {
         if (AutoFishMod.enabled) {
 
-            if (this.chestAppearTime > 1) {
+            if (this.chestAppearTime != -1) {
                 this.chestAppearTime = 0;
+                this.chestTimer = 30.0f;
             }
-            chestVisible = true;
+            //chestVisible = true;
 
             // 2. Tự động bắt Rương (Treasure)
             // Khi rương đã hiện, set luôn tiến trình (timer) lên max (30) để bắt xong luôn.
-                this.chestTimer = 30.0f;
+
 
             // 3. Tự động bắt Cá (Fish)
             // Set điểm lên max (120) để hoàn thành minigame.
