@@ -31,7 +31,7 @@ public class FishingScreenMixin {
     /**
      * Can thiệp vào đầu mỗi tick để xử lý các animation chuyển cảnh (Intro và Chest).
      */
-    @Inject(method = "tick", at = @At("HEAD"), remap = false)
+    @Inject(method = "tick", at = @At("HEAD"), remap = true)
     private void onTick(CallbackInfo ci) {
         if (!AutoFishMod.enabled) return;
 
