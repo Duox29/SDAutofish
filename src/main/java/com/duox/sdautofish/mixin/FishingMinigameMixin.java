@@ -11,34 +11,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = FishingMinigame.class)
 public class FishingMinigameMixin {
 
-    // Shadow biến points (tiến trình bắt cá).
-    // Warning "Unable to locate obfuscation mapping" là bình thường.
-    @Shadow private float points;
-
-    @Shadow private boolean chestVisible;
-
-    // --- PHẦN GÂY CRASH ---
-    // Biến này không tồn tại trong mod stardew_fishing-3.3.jar
-    // Bạn cần decompile file jar để tìm tên đúng (ví dụ: treasureProgress, currentTreasureLevel...)
-    // Sau khi tìm được, hãy bỏ comment và đổi tên biến ở đây.
-    // @Shadow private float treasureCatchLevel;
+    // Shadow các biến private từ FishingMinigame.java
+    @Shadow private float points;          // Điểm bắt cá (Max 120)
+    @Shadow private boolean chestVisible;  // Trạng thái hiển thị rương
+    @Shadow private float chestTimer;      // Tiến trình bắt rương (Max 30)
+    @Shadow private int chestAppearTime;   // Thời gian chờ rương xuất hiện
 
     @Inject(method = "tick(Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;floor(D)I"))
     private void onTickLogic(boolean mouseDown, CallbackInfo ci) {
         if (AutoFishMod.enabled) {
 
-            // 1. Xử lý Cá (Fish) -> Set max điểm để bắt ngay lập tức
-            // Giá trị 120.0f thường là max points của minigame này
-            this.points = 120.0f;
-
-            // 2. Xử lý Rương (Treasure)
-            // Tạm thời comment để tránh crash game.
-            // Logic: Nếu tìm được tên biến đúng, set nó thành 1.0f (hoặc max value tương ứng)
-            /*
-            if (this.chestVisible) {
-                 // this.TÊN_BIẾN_ĐÚNG = 1.0f;
+            if (this.chestAppearTime > 1) {
+                this.chestAppearTime = 0;
             }
-            */
+            chestVisible = true;
+
+            // 2. Tự động bắt Rương (Treasure)
+            // Khi rương đã hiện, set luôn tiến trình (timer) lên max (30) để bắt xong luôn.
+                this.chestTimer = 30.0f;
+
+            // 3. Tự động bắt Cá (Fish)
+            // Set điểm lên max (120) để hoàn thành minigame.
+            this.points = 120.0f;
         }
     }
 }
