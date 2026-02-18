@@ -13,24 +13,22 @@ import java.util.Optional;
 
 /**
  * Mixin to fix a crash in the MinigameModifiersReloadListener.
- * This occurs when getModifiers is called before the listener has been initialized.
+ * Compatible with Stardew Fishing v3.2, v3.3, and v3.4.
  */
 @Mixin(value = MinigameModifiersReloadListener.class, remap = false)
 public class MinigameCrashFixMixin {
 
-    // Shadow the static INSTANCE field from the original class for checking.
+    // Field INSTANCE vẫn tồn tại ở cả 2 phiên bản (dù bản 3.4 có thêm @Nullable) nên Shadow vẫn an toàn.
     @Shadow private static MinigameModifiersReloadListener INSTANCE;
 
     /**
-     * Injects a check at the beginning of getModifiers to prevent a NullPointerException.
-     * If the INSTANCE is null, it returns an empty Optional, avoiding the crash.
-     *
-     * @param stack The ItemStack being checked for modifiers.
-     * @param cir   The callback info for the returnable method.
+     * Fix crash for v3.2/v3.3 where getModifiers accesses null INSTANCE.
+     * * ADDED: require = 0
+     * This tells Mixin: "If this method is missing (like in v3.4), just ignore this injection instead of crashing."
      */
-    @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true, require = 0)
     private static void onGetModifiers(ItemStack stack, CallbackInfoReturnable<Optional<MinigameModifiers>> cir) {
-        // SAFETY CHECK: If INSTANCE is not yet initialized (null), return Empty immediately to prevent a crash.
+        // Chỉ chạy logic này nếu method getModifiers tồn tại (v3.2/3.3)
         if (INSTANCE == null) {
             cir.setReturnValue(Optional.empty());
         }

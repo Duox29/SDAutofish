@@ -9,19 +9,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * Mixin class for FishingScreen to enable auto-fishing functionality.
- */
 @Mixin(value = FishingScreen.class)
 public abstract class FishingAutoMixin {
 
     @Shadow private FishingMinigame minigame;
     @Shadow public abstract void setInputDown(boolean down);
 
-    /**
-     * Auto-fishing logic that controls the fishing bar position.
-     * Aligns the bar center with fish position, prioritizing treasure chests when safe.
-     */
+    // Xóa biến private final float FISHING_PROGRESS_TREASURE ở đây
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         if (!AutoFishMod.enabled || minigame == null) {
@@ -37,7 +32,8 @@ public abstract class FishingAutoMixin {
 
         float targetCenter = fishCenter;
 
-        if (minigame.getProgress() > 0.95f && minigame.isChestVisible()) {
+        // CẬP NHẬT: Sử dụng biến động từ AutoFishMod
+        if (minigame.getProgress() > AutoFishMod.fishingProgressTreasure && minigame.isChestVisible()) {
             float chestCenter = minigame.getChestPos() + 6.5f;
             targetCenter = chestCenter;
         }
