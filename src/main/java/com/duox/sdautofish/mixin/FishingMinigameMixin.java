@@ -25,8 +25,6 @@ public class FishingMinigameMixin {
         if (AutoFishMod.enabled) {
 
             double targetBobberPos = this.fishPos - (this.barSize / 2.0) + 7.0;
-
-            // CẬP NHẬT: Thay 0.95f bằng biến có thể cấu hình được
             if ((this.points / 120.0f) > AutoFishMod.fishingProgressTreasure && this.chestVisible) {
                 targetBobberPos = this.chestPos + 6.5 - (this.barSize / 2.0);
             }

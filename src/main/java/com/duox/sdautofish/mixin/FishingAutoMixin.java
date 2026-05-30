@@ -15,8 +15,6 @@ public abstract class FishingAutoMixin {
     @Shadow private FishingMinigame minigame;
     @Shadow public abstract void setInputDown(boolean down);
 
-    // Xóa biến private final float FISHING_PROGRESS_TREASURE ở đây
-
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         if (!AutoFishMod.enabled || minigame == null) {
@@ -32,7 +30,6 @@ public abstract class FishingAutoMixin {
 
         float targetCenter = fishCenter;
 
-        // CẬP NHẬT: Sử dụng biến động từ AutoFishMod
         if (minigame.getProgress() > AutoFishMod.fishingProgressTreasure && minigame.isChestVisible()) {
             float chestCenter = minigame.getChestPos() + 6.5f;
             targetCenter = chestCenter;
