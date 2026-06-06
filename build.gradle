@@ -73,7 +73,9 @@ dependencies {
     //3.2
     //implementation fg.deobf("curse.maven:stardew-fishing-1066037:6851718")
     //3.4
-    implementation fg.deobf("curse.maven:stardew-fishing-1066037:7390723")
+    //implementation fg.deobf("curse.maven:stardew-fishing-1066037:7390723")
+    //3.7
+    implementation fg.deobf("curse.maven:stardew-fishing-1066037:8070773")
 }
 
 tasks.named('processResources', ProcessResources).configure {
