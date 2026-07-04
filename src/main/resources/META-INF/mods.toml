@@ -4,20 +4,20 @@ license="MIT"
 issueTrackerURL=""
 
 [[mods]]
-modId="autofish"
+modId="fishingassistant"
 version="1.0.0"
 displayName="Stardew Auto Fish"
 authors="Dev"
 description="Addon mod automating the fishing minigame."
 
-[[dependencies.autofish]]
+[[dependencies.fishingassistant]]
 modId="forge"
 mandatory=true
 versionRange="[47,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.autofish]]
+[[dependencies.fishingassistant]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.20.1,1.21)"
@@ -25,7 +25,7 @@ ordering="NONE"
 side="BOTH"
 
 # Dependency bắt buộc vào mod gốc
-[[dependencies.autofish]]
+[[dependencies.fishingassistant]]
 modId="stardew_fishing"
 mandatory=true
 versionRange="[1.0,)"

@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.duox.sdautofish.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "autofish.refmap.json",
+  "refmap": "fishingassistant.refmap.json",
   "mixins": [
     "FishingAutoMixin",
     "MinigameCrashFixMixin",

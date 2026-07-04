@@ -67,9 +67,7 @@ dependencies {
     }
     implementation fg.deobf("curse.maven:aquaculture-60028:6296111")
 
-    // Import the original mod as a library for compilation (not included in the final jar)
-    implementation fg.deobf("curse.maven:stardew-fishing-1066037:7266346")
-}
+    implementation fg.deobf("curse.maven:stardew-fishing-1066037:7409704")}
 
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
