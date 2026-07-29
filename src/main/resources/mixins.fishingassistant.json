@@ -5,13 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "fishingassistant.refmap.json",
   "mixins": [
-    "FishingAutoMixin",
-    "MinigameCrashFixMixin",
     "FishingMinigameMixin",
     "FishingScreenMixin"
-  ],
-  "client": [
-    "FishingAutoMixin"
   ],
   "injectors": {
     "defaultRequire": 1

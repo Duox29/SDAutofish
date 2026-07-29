@@ -10,12 +10,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = FishingMinigame.class)
 public class FishingMinigameMixin {
-
-    // Shadow các biến private từ FishingMinigame.java
-    @Shadow private float points;          // Điểm bắt cá (Max 120)
-    @Shadow private boolean chestVisible;  // Trạng thái hiển thị rương
-    @Shadow private float chestTimer;      // Tiến trình bắt rương (Max 30)
-    @Shadow private int chestAppearTime;   // Thời gian chờ rương xuất hiện
+    @Shadow private float points;
+    @Shadow private boolean chestVisible;
+    @Shadow private float chestTimer;
+    @Shadow private int chestAppearTime;
 
     @Inject(method = "tick(Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;floor(D)I"))
     private void onTickLogic(boolean mouseDown, CallbackInfo ci) {
@@ -25,14 +23,6 @@ public class FishingMinigameMixin {
                 this.chestAppearTime = 0;
                 this.chestTimer = 30.0f;
             }
-            //chestVisible = true;
-
-            // 2. Tự động bắt Rương (Treasure)
-            // Khi rương đã hiện, set luôn tiến trình (timer) lên max (30) để bắt xong luôn.
-
-
-            // 3. Tự động bắt Cá (Fish)
-            // Set điểm lên max (120) để hoàn thành minigame.
             this.points = 120.0f;
         }
     }
