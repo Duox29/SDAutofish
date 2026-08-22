@@ -30,7 +30,7 @@ minecraft {
             arg "-mixin.config=mixins.${mod_id}.json"
 
             mods {
-                autofish {
+                sdautofish {
                     source sourceSets.main
                 }
             }
@@ -41,7 +41,7 @@ minecraft {
 mixin {
     add sourceSets.main, "mixins.${mod_id}.json"
     config "mixins.${mod_id}.json"
-    add sourceSets.main, "autofish.refmap.json"
+    add sourceSets.main, "${mod_id}.refmap.json"
 }
 
 repositories {
