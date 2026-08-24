@@ -28,6 +28,6 @@ side="BOTH"
 [[dependencies.${mod_id}]]
 modId="stardew_fishing"
 mandatory=true
-versionRange="[1.0,)"
+versionRange="[3.3,)"
 ordering="AFTER"
 side="CLIENT"

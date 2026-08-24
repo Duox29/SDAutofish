@@ -29,12 +29,12 @@ public class MinigameCrashFixMixin {
      * Injects a check at the beginning of getModifiers to prevent a NullPointerException.
      * If the INSTANCE is null, it returns an empty Optional, avoiding the crash.
      *
-     * require/expect are 0 so this is a no-op on versions where the method is absent.
+     * require = 0 so this is a no-op on versions where the method is absent.
      *
      * @param stack The ItemStack being checked for modifiers.
      * @param cir   The callback info for the returnable method.
      */
-    @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
+    @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true, require = 0)
     private static void onGetModifiers(ItemStack stack, CallbackInfoReturnable<Optional<MinigameModifiers>> cir) {
         // SAFETY CHECK: If INSTANCE is not yet initialized (null), return Empty immediately to prevent a crash.
         if (INSTANCE == null) {

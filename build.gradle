@@ -46,9 +46,6 @@ mixin {
 
 repositories {
     mavenCentral()
-    flatDir {
-        dirs 'libs'
-    }
     maven {
         url "https://cursemaven.com"
     }
