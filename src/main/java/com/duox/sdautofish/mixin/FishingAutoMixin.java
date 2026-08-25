@@ -37,7 +37,7 @@ public abstract class FishingAutoMixin {
 
         float targetCenter = fishCenter;
 
-        if (minigame.getProgress() > 0.95f && minigame.isChestVisible()) {
+        if (minigame.getProgress() > AutoFishMod.fishingProgressTreasure && minigame.isChestVisible()) {
             float chestCenter = minigame.getChestPos() + 6.5f;
             targetCenter = chestCenter;
         }

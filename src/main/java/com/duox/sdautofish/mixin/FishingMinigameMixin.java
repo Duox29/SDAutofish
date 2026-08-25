@@ -44,7 +44,7 @@ public class FishingMinigameMixin {
             // --- AUTO-LOOT TREASURE LOGIC (Optional) ---
             // Prioritize treasure chests if progress is safe (> 95%) and a chest is visible.
             // 120 is the default POINTS_TO_FINISH
-            if ((this.points / 120.0f) > 0.95f && this.chestVisible) {
+            if ((this.points / 120.0f) > AutoFishMod.fishingProgressTreasure && this.chestVisible) {
                 // Chest height is ~13, so center offset is ~6.5
                 targetBobberPos = this.chestPos + 6.5 - (this.barSize / 2.0);
             }
