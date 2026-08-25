@@ -28,7 +28,7 @@ public class MinigameCrashFixMixin {
      * @param stack The ItemStack being checked for modifiers.
      * @param cir   The callback info for the returnable method.
      */
-    @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getModifiers", at = @At("HEAD"), cancellable = true, require = 0)
     private static void onGetModifiers(ItemStack stack, CallbackInfoReturnable<Optional<MinigameModifiers>> cir) {
         // SAFETY CHECK: If INSTANCE is not yet initialized (null), return Empty immediately to prevent a crash.
         if (INSTANCE == null) {

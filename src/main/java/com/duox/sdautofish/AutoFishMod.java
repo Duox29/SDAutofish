@@ -17,7 +17,7 @@ import org.lwjgl.glfw.GLFW;
  * Main mod class for AutoFish functionality.
  * Provides toggle key binding and mod state management.
  */
-@Mod("autofish")
+@Mod("sdautofish")
 public class AutoFishMod {
     public static boolean enabled = false;
     public static final KeyMapping TOGGLE_KEY = new KeyMapping(
